@@ -1,0 +1,19 @@
+{
+  "city": "Austin",
+  "citySlug": "austin",
+  "date": "2026-07-11",
+  "dateLabel": "July 11, 2026",
+  "eyebrow": "the austin circle",
+  "subtitle": "the first seek",
+  "caption": "Clear morning — steady footsteps.",
+  "distance": "3.4 mi",
+  "duration": "1h 15m",
+  "ascent": "182 ft",
+  "steps": "6,961",
+  "weather": "Clear, 77°F",
+  "pilgrims": 2,
+  "etegami": "etegami.jpg",
+  "seal": "seal.png",
+  "pilgrimWalkId": "toEV3xT44t",
+  "pilgrimUrl": "https://walk.pilgrimapp.org/toEV3xT44t"
+}
