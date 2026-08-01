@@ -10,6 +10,11 @@
      effectiveFrom:   optional ISO date (YYYY-MM-DD). If set, the next walk is
                       never earlier than this date — used when a city's cadence
                       changes and we want to skip to the next valid month.
+     override:        optional one-off { date: "YYYY-MM-DD", time?: "HH:MM" }.
+                      Replaces the pattern's next occurrence for a single month
+                      (e.g. a scheduling conflict). Ignored once its walk ends,
+                      so the pattern resumes on its own; its .ics is a single
+                      non-recurring event.
 
    Auto-init at DOMContentLoaded:
      [data-cadence-next]      → text content replaced with "Next: Saturday, June 13 — 8 AM CDT"
@@ -81,6 +86,28 @@
     return a.year === b.year && a.month === b.month && a.day === b.day;
   }
 
+  // True once a walk's end time has passed — an earlier day, or today after
+  // start + duration.
+  function walkEnded(candidate, hh, mm, durationMinutes, current) {
+    if (isStrictlyBefore(candidate, current)) return true;
+    if (isSameDay(candidate, current)) {
+      return (current.hh * 60 + current.mm) >= (hh * 60 + mm + durationMinutes);
+    }
+    return false;
+  }
+
+  // A one-off date that replaces the pattern's next occurrence for a single
+  // month. Honored until its walk ends, then ignored — so it self-deactivates
+  // and the pattern resumes without any further edit.
+  function overrideNextWalk(cadence, current, durationMinutes) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(cadence.override && cadence.override.date || '');
+    if (!m) return null;
+    const [ohh, omm] = (cadence.override.time || cadence.time || '08:00').split(':').map(Number);
+    const candidate = { year: +m[1], month: +m[2], day: +m[3] };
+    if (walkEnded(candidate, ohh, omm, durationMinutes, current)) return null;
+    return { ...candidate, hh: ohh, mm: omm, tz: cadence.tz || 'UTC', isOverride: true };
+  }
+
   function computeNextWalk(cadence, now) {
     const parsed = parsePattern(cadence.pattern);
     if (!parsed) return null;
@@ -92,22 +119,21 @@
 
     const current = nowInTz(tz, now);
 
+    const override = overrideNextWalk(cadence, current, durationMinutes);
+    if (override) return override;
+
     let day = nthWeekdayOfMonth(current.year, current.month, parsed.ord, parsed.dow);
     let candidate = { year: current.year, month: current.month, day };
 
-    // Advance to next month if the candidate is in the past, OR if the
-    // candidate is today AND the walk's end time has already passed.
-    const walkEndedToday = isSameDay(candidate, current)
-      && (current.hh * 60 + current.mm) >= (hh * 60 + mm + durationMinutes);
-
-    if (day == null || isStrictlyBefore(candidate, current) || walkEndedToday) {
+    // Past this month's walk? Roll forward to next month's occurrence.
+    if (day == null || walkEnded(candidate, hh, mm, durationMinutes, current)) {
       let ny = current.year, nm = current.month + 1;
       if (nm > 12) { nm = 1; ny += 1; }
       day = nthWeekdayOfMonth(ny, nm, parsed.ord, parsed.dow);
       candidate = { year: ny, month: nm, day };
     }
 
-    return { year: candidate.year, month: candidate.month, day: candidate.day, hh, mm, tz };
+    return { year: candidate.year, month: candidate.month, day: candidate.day, hh, mm, tz, isOverride: false };
   }
 
   function formatNextLabel(walk) {
@@ -247,7 +273,9 @@
     const slug = (data.name || 'circle').toLowerCase().replace(/\W+/g, '');
     const filename = `${slug}-${walk.year}-${pad(walk.month)}-${pad(walk.day)}.ics`;
     const recurrenceCount = data.cadence.recurrenceCount || DEFAULT_RRULE_COUNT;
-    const rrule = rruleFromPattern(data.cadence.pattern, recurrenceCount);
+    // A one-off override replaces a single month's walk, so its .ics is a
+    // standalone event; the recurring series resumes on the next download.
+    const rrule = walk.isOverride ? null : rruleFromPattern(data.cadence.pattern, recurrenceCount);
     const eventMeta = {
       uid: `${slug}-circle@walk.lc`,
       summary: `The ${data.name} Circle`,
