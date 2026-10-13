@@ -44,7 +44,7 @@
     <textPath href="#og-austin-rim-top" startOffset="50%" text-anchor="middle">AUSTIN  ·  TEXAS</textPath>
   </text>
   <text fill="#8B3A2E" font-family="'Lato', -apple-system, sans-serif" font-size="9" letter-spacing="6" font-weight="500" opacity="0.7">
-    <textPath href="#og-austin-rim-bot" startOffset="50%" text-anchor="middle">FIRST SATURDAY</textPath>
+    <textPath href="#og-austin-rim-bot" startOffset="50%" text-anchor="middle">SECOND SATURDAY</textPath>
   </text>
 
   <!-- Title -->
@@ -60,7 +60,7 @@
         font-size="22"
         font-weight="400"
         font-style="italic"
-        fill="#6B5D50">first saturday of every month, around lady bird lake</text>
+        fill="#6B5D50">monthly walks around lady bird lake · 2026</text>
 
   <!-- Domain -->
   <text x="600" y="585" text-anchor="middle"
@@ -68,5 +68,5 @@
         font-size="12"
         font-weight="300"
         letter-spacing="0.4em"
-        fill="#8B3A2E">WALK.LC / AUSTIN</text>
+        fill="#8B3A2E">CIRCLE.PILGRIMAPP.ORG / AUSTIN</text>
 </svg>

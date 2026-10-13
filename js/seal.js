@@ -1,4 +1,4 @@
-/* walk.lc — procedural goshuin renderer.
+/* Local Circle — procedural goshuin renderer.
    Adapted from pilgrim-landing/js/seal.js for the warm-rust Local Circle palette.
    Renders two kinds of seal:
      - master:  fixed, the brand mark (centered 輪, "LOCAL · CIRCLE")
@@ -198,8 +198,11 @@
 
   /* ---------- public renderers ---------- */
 
+  // Legacy domain kept on purpose: it's part of every seal's hash seed.
+  const SEED_PREFIX = 'walk.lc';
+
   async function renderMasterSeal(container) {
-    const seed = await hashBytes('walk.lc::local-circle::master');
+    const seed = await hashBytes(`${SEED_PREFIX}::local-circle::master`);
     const svg = buildSvg({
       seed,
       kanji: '輪',
@@ -214,7 +217,7 @@
 
   async function renderCitySeal(container, data) {
     const loopSig = (data.loop || []).map((p) => p.join(',')).join(';');
-    const seed    = await hashBytes(`walk.lc::city::${data.name}::${data.lat},${data.lng}::${loopSig}`);
+    const seed    = await hashBytes(`${SEED_PREFIX}::city::${data.name}::${data.lat},${data.lng}::${loopSig}`);
     const slug    = (data.name || 'city').toLowerCase().replace(/\W+/g, '');
     const topText = [data.name, data.state].filter(Boolean).map((s) => s.toUpperCase()).join('  ·  ');
     const polygonPoints = loopToPoints(data.loop, 70) || syntheticLoop(seed);

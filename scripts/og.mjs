@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// walk.lc — per-walk OG image generator
+// Local Circle — per-walk OG image generator
 //
 // Reads a walk.json next to a walk's assets, builds a 1200x630 SVG with the
 // etegami softly faded across the right side and the walk's title/stats on
@@ -112,7 +112,7 @@ function buildSvg(walk, etegamiUri) {
     <text x="0" y="576"
           font-family="Lato, -apple-system, sans-serif"
           font-size="11" font-weight="300"
-          fill="${INK_SOFT}" letter-spacing="6">WALK.LC</text>
+          fill="${INK_SOFT}" letter-spacing="6">CIRCLE.PILGRIMAPP.ORG</text>
   </g>
 </svg>
 `;

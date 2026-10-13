@@ -1,4 +1,4 @@
-/* walk.lc — Local Circle. Warm-rust sibling to pilgrim-landing.
+/* Local Circle — Local Circle. Warm-rust sibling to pilgrim-landing.
    Self-contained. Mirrors the typographic conventions of pilgrim-landing/circles.css. */
 
 :root {
@@ -217,34 +217,6 @@ button:focus-visible {
   color: var(--ink-soft);
 }
 
-.city-tile.empty .city-tile-seal {
-  border: 1.5px dashed var(--rule);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--serif);
-  font-size: 1.8rem;
-  color: var(--ink-fog);
-  font-weight: 300;
-  box-sizing: border-box;
-}
-
-.city-tile.empty .city-tile-name { color: var(--ink-fog); }
-
-/* ----- Start CTA (homepage) ----- */
-
-.start-cta {
-  text-align: center;
-  font-size: clamp(15px, 1.6vw, 17px);
-  color: var(--ink-soft);
-  margin: clamp(48px, 8vh, 80px) auto 0;
-  padding-top: clamp(32px, 5vh, 48px);
-  border-top: 1px solid var(--rule);
-  max-width: 24rem;
-  line-height: 1.7;
-}
-
 /* ----- City page: poetry ----- */
 
 .poetry {
@@ -294,22 +266,6 @@ button:focus-visible {
   margin: 0;
 }
 
-.rule-block .meta {
-  font-family: var(--sans);
-  font-weight: 300;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--ink-fog);
-  margin-top: 0.6em;
-}
-
-.rule-block .meta a {
-  color: var(--ink-fog);
-  text-decoration: none;
-  border-bottom: 1px solid var(--rule);
-  padding-bottom: 1px;
-}
-
 /* ----- City page: practical block ----- */
 
 .practical {
@@ -354,88 +310,6 @@ button:focus-visible {
   text-decoration: none;
   border-bottom: 1px solid var(--rule);
   padding-bottom: 1px;
-}
-
-.practical .phone {
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-/* ----- City page: subscribe CTA ----- */
-
-.subscribe-cta {
-  text-align: center;
-  font-family: var(--sans);
-  font-weight: 300;
-  font-size: 14px;
-  color: var(--ink-soft);
-  margin: clamp(32px, 5vh, 48px) auto 0;
-  line-height: 1.8;
-  max-width: 26rem;
-}
-
-.subscribe-cta .quiet {
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: var(--ink-fog);
-}
-
-/* ----- Start page (BYO kit) ----- */
-
-.kit-section {
-  margin-top: clamp(48px, 8vh, 80px);
-}
-
-.kit-section h2 {
-  font-style: italic;
-  text-align: left;
-}
-
-.kit-section p,
-.kit-section li {
-  font-size: clamp(16px, 1.7vw, 18px);
-  color: var(--ink-soft);
-}
-
-.kit-section ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.kit-section li {
-  margin: 0 0 0.9em;
-  padding-left: 1.2em;
-  position: relative;
-}
-
-.kit-section li::before {
-  content: "·";
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-  font-size: 1.6em;
-  line-height: 1;
-  top: -0.05em;
-}
-
-.kit-section .quiet-note {
-  font-size: 14px;
-  color: var(--ink-fog);
-  font-style: italic;
-  margin-top: 1em;
-}
-
-.kit-section .template {
-  background: var(--accent-tint);
-  border-left: 2px solid var(--accent);
-  padding: 1em 1.25em;
-  margin: 1em 0;
-  font-family: var(--sans);
-  font-weight: 300;
-  font-size: 14px;
-  white-space: pre-wrap;
-  color: var(--ink-soft);
 }
 
 /* ----- Footer ----- */

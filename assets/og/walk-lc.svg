@@ -61,7 +61,7 @@
         font-size="24"
         font-weight="400"
         font-style="italic"
-        fill="#6B5D50">small monthly walks in cities around the world</text>
+        fill="#6B5D50">small monthly walks · first twenty minutes silent</text>
 
   <!-- Domain -->
   <text x="600" y="585" text-anchor="middle"
@@ -69,5 +69,5 @@
         font-size="12"
         font-weight="300"
         letter-spacing="0.4em"
-        fill="#8B3A2E">WALK.LC</text>
+        fill="#8B3A2E">CIRCLE.PILGRIMAPP.ORG</text>
 </svg>

@@ -4,26 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Local Circle — small monthly walks</title>
-  <meta name="description" content="Local Circle. Small monthly walks in cities around the world. First twenty minutes silent. Then talk if you want. No app. No fee. Just show up.">
+  <meta name="description" content="Local Circle. Small monthly walks. First twenty minutes silent. Then talk if you want. The circle is resting; the walks are kept here.">
 
-  <link rel="canonical" href="https://walk.lc/">
+  <link rel="canonical" href="https://circle.pilgrimapp.org/">
 
   <meta property="og:title" content="Local Circle">
-  <meta property="og:description" content="Small monthly walks in cities around the world. First twenty minutes silent. Then talk if you want. No app. No fee. Just show up.">
+  <meta property="og:description" content="Small monthly walks. First twenty minutes silent. Then talk if you want. The circle is resting; the walks are kept here.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://walk.lc/">
+  <meta property="og:url" content="https://circle.pilgrimapp.org/">
   <meta property="og:site_name" content="Local Circle">
   <meta property="og:locale" content="en_US">
-  <meta property="og:image" content="https://walk.lc/assets/og/walk-lc.png">
+  <meta property="og:image" content="https://circle.pilgrimapp.org/assets/og/walk-lc.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Local Circle — small monthly walks in cities around the world">
+  <meta property="og:image:alt" content="Local Circle — small monthly walks">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Local Circle">
-  <meta name="twitter:description" content="Small monthly walks in cities around the world.">
-  <meta name="twitter:image" content="https://walk.lc/assets/og/walk-lc.png">
-  <meta name="twitter:image:alt" content="Local Circle — small monthly walks in cities around the world">
+  <meta name="twitter:description" content="Small monthly walks. The circle is resting; the walks are kept here.">
+  <meta name="twitter:image" content="https://circle.pilgrimapp.org/assets/og/walk-lc.png">
+  <meta name="twitter:image:alt" content="Local Circle — small monthly walks">
 
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
@@ -44,11 +44,10 @@
     "@type": "Organization",
     "name": "Local Circle",
     "alternateName": "Walk Local",
-    "url": "https://walk.lc/",
-    "logo": "https://walk.lc/assets/apple-touch-icon.png",
-    "description": "Small monthly walks in cities around the world. First twenty minutes silent. Then talk if you want.",
-    "sameAs": ["https://pilgrimapp.org"],
-    "email": "start@walk.lc"
+    "url": "https://circle.pilgrimapp.org/",
+    "logo": "https://circle.pilgrimapp.org/assets/apple-touch-icon.png",
+    "description": "Small monthly walks. First twenty minutes silent. Then talk if you want.",
+    "sameAs": ["https://pilgrimapp.org"]
   }
   </script>
 
@@ -65,30 +64,21 @@
     </header>
 
     <section class="manifesto">
-      <p>Small monthly walks in cities around the world.</p>
+      <p>Small monthly walks.</p>
       <p>First twenty minutes silent. Then talk if you want.</p>
-      <p>No app. No fee. Just show up.</p>
+      <p>The circle is resting for now. The walks are kept here.</p>
     </section>
 
-    <p class="section-label">where we walk</p>
+    <p class="section-label">where we walked</p>
 
     <div class="city-grid" id="city-grid">
       <!-- City tiles rendered from #cities-data -->
-      <div class="city-tile empty" aria-hidden="true">
-        <div class="city-tile-seal">+</div>
-        <div class="city-tile-name">Your city?</div>
-      </div>
     </div>
-
-    <p class="start-cta">
-      Want to start one where you live?<br>
-      Email <a href="mailto:start@walk.lc">start@walk.lc</a> &mdash; we&rsquo;ll send you the kit.
-    </p>
 
   </main>
 
   <footer>
-    <p>walk.lc &middot; a sister project of <a href="https://pilgrimapp.org">pilgrim</a></p>
+    <p>local circle &middot; a sister project of <a href="https://pilgrimapp.org">pilgrim</a></p>
     <a class="footer-duck" href="/rubberduck/" aria-label="a question cannot be asked unless there is already the potentiality of the answer">
       <img class="footer-duck-static" src="/assets/duck/duck-24.png" srcset="/assets/duck/duck-24.png 1x, /assets/duck/duck-48.png 2x" width="24" height="24" alt="">
       <img class="footer-duck-animated" src="/assets/duck/duck.gif" width="24" height="24" alt="" loading="lazy">
@@ -118,7 +108,7 @@
           [30.2683, -97.7570],
           [30.2715, -97.7548]
         ],
-        "cadence": { "pattern": "second-saturday", "time": "08:00", "tz": "America/Chicago", "effectiveFrom": "2026-06-01" }
+        "cadence": { "pattern": "second-saturday" }
       }
     ]
   </script>
@@ -143,8 +133,6 @@
         try { cities = JSON.parse(dataEl.textContent); }
         catch (err) { console.error('[homepage] failed to parse cities-data:', err); return; }
 
-        var emptyTile = grid.querySelector('.city-tile.empty');
-
         cities.forEach(function(city) {
           var tile = document.createElement('a');
           tile.className = 'city-tile';
@@ -160,7 +148,7 @@
           name.textContent = city.name;
           tile.appendChild(name);
 
-          grid.insertBefore(tile, emptyTile);
+          grid.appendChild(tile);
           window.LocalCircleSeal.renderCitySeal(sealHolder, city);
         });
       });
